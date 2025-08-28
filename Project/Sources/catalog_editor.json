@@ -1,0 +1,110 @@
+{
+	"tables": {
+		"Prompts": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 354,
+				"top": 45,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"(INFO)": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 198,
+				"top": 44,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6
+		},
+		"(PictureKeywords)": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 196.859375,
+				"top": 76.90625,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields": {
+				"IDPictures": {
+					"position": 3
+				},
+				"ID": {
+					"position": 1
+				}
+			}
+		},
+		"(Keywords)": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 383.78515625,
+				"top": 38.78125,
+				"width": 120,
+				"height": 167.33203125
+			},
+			"displayable_fields_count": 6,
+			"fields_ordering": 2,
+			"fields": {
+				"keyword": {
+					"position": 2
+				},
+				"ID": {
+					"position": 1
+				}
+			}
+		},
+		"Pictures": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			},
+			"coordinates": {
+				"left": 0,
+				"top": 41.4453125,
+				"width": 159,
+				"height": 337.33203125
+			},
+			"displayable_fields_count": 14,
+			"fields": {
+				"picture": {
+					"position": 4
+				},
+				"prompt": {
+					"position": 3
+				},
+				"terms": {
+					"position": 2
+				},
+				"ID": {
+					"position": 1
+				}
+			}
+		}
+	}
+}

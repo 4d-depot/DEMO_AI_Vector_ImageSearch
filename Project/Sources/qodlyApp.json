@@ -1,0 +1,8 @@
+{
+	"webforms.renderer.indexPage": "DemoPage",
+	"webforms.display-mode": "neutral",
+	"webforms.i18n": {
+		"supported": [],
+		"primary": ""
+	}
+}

@@ -1,0 +1,2771 @@
+{
+	"metadata": {
+		"v": "1.0",
+		"datasources": [
+			{
+				"id": "traceStatus",
+				"type": "scalar",
+				"namespace": "",
+				"dataType": "bool",
+				"initialValue": false
+			},
+			{
+				"id": "searchInput",
+				"type": "scalar",
+				"namespace": "",
+				"dataType": "string",
+				"initialValue": ""
+			},
+			{
+				"id": "promptList",
+				"type": "entitysel",
+				"dataclass": "Prompts",
+				"initialValue": "all",
+				"depth": null,
+				"pageSize": 100
+			},
+			{
+				"id": "pictures",
+				"type": "entitysel",
+				"dataclass": "Pictures",
+				"initialValue": "all",
+				"depth": null,
+				"pageSize": 100
+			},
+			{
+				"id": "selectedPrompt",
+				"type": "entity",
+				"dataclass": "Prompts",
+				"from": "promptList",
+				"namespace": "",
+				"initialValue": "first",
+				"depth": null
+			},
+			{
+				"id": "OpenAIkey",
+				"type": "scalar",
+				"namespace": "",
+				"dataType": "string",
+				"initialValue": ""
+			},
+			{
+				"id": "pictureEntity",
+				"type": "entity",
+				"dataclass": "Pictures",
+				"from": "pictures",
+				"namespace": "",
+				"initialValue": "first",
+				"depth": null
+			}
+		],
+		"styles": [
+			{
+				"name": "uploadStyle",
+				"content": "self {\n    display: flex !important;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    text-align: center;\n    max-width: 440px;\n    padding: 40px;\n    border-radius: 30px;\n    border: 1px dashed rgba(102, 126, 234, 0.5); /* #667eea at 50% */\n    background: linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.9) 0%,\n      rgba(102, 126, 234, 0.08) 100%\n    );\n    cursor: pointer;\n    transition: border-color 0.3s ease;\n  }\n\n  self:hover {\n    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, #f0e7f9 100%)\n  }\n\n  self .fd-icon {\n    font-size: 48px;\n    color: #667eea;\n    margin-bottom: 12px;\n  }\n\n  self .flex-col {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  self .flex-col > span:nth-child(2) {\n    color: #333;\n    font-size: 16px;\n    font-weight: 500;\n  }\n\n  self .flex-col > span:last-child {\n    margin-top: 4px;\n    font-size: 14px;\n    color: #999;\n  }",
+				"parentId": null,
+				"id": "GqEr2OXmwhzXdk6Hd1WLc",
+				"scope": "local"
+			}
+		],
+		"states": []
+	},
+	"components": {
+		"ROOT": {
+			"type": {
+				"resolvedName": "Container"
+			},
+			"isCanvas": true,
+			"props": {
+				"classNames": [],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"oninit"
+						],
+						"id": "42dFQjURdt6bkFNBRF5RV6",
+						"method": "VectorManagement.initOpenAIStorage",
+						"params": [],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "Variable"
+						}
+					},
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"oninit"
+						],
+						"id": "3KwUFV1zXg6S9vn4Bok2SG",
+						"method": "VectorManagement.initTrace",
+						"params": [],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "Boolean",
+							"datasource": "traceStatus"
+						}
+					},
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"oninit"
+						],
+						"id": "p1tNPm4TawrvHHQXNnsm1H",
+						"method": "VectorManagement.promptList",
+						"params": [],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PromptsSelection",
+							"datasource": "promptList"
+						}
+					},
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"oninit"
+						],
+						"id": "mVttZjS7tBFvE6N5TcNsH8",
+						"method": "VectorManagement.calculateWithSelectedPrompt",
+						"params": [
+							{
+								"name": "prompt",
+								"type": "cs.PromptsEntity",
+								"datasource": "selectedPrompt",
+								"id": "pX1Uw9Bgiip4X9Zu5WotRA"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PicturesSelection",
+							"datasource": "pictures"
+						}
+					}
+				],
+				"airyMode": false,
+				"className": "bg-white h-full w-full px-6",
+				"style": {
+					"display": "flex"
+				}
+			},
+			"displayName": "Page",
+			"custom": {},
+			"parent": "",
+			"hidden": false,
+			"nodes": [
+				"1zlPBnpmuU",
+				"ZcKppj6Zs-",
+				"7PwkczZfEx"
+			],
+			"linkedNodes": {}
+		},
+		"1zlPBnpmuU": {
+			"type": {
+				"resolvedName": "Tabs"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [
+					"beautifulTabs"
+				],
+				"events": [],
+				"tabs": [
+					{
+						"id": "5w8trRVceLaSo7HqdDPi8M",
+						"title": "Info",
+						"initialSsRef": "tab_1"
+					},
+					{
+						"id": "pq6KJLTuUQ1WotJr2MW6A9",
+						"title": "Pictures",
+						"initialSsRef": "tab_2"
+					}
+				],
+				"variant": "line",
+				"style": {}
+			},
+			"displayName": "Tabs",
+			"custom": {},
+			"parent": "ROOT",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"5w8trRVceLaSo7HqdDPi8M": "vSi2IKEkYV",
+				"pq6KJLTuUQ1WotJr2MW6A9": "GGbpE-YcQz"
+			}
+		},
+		"vSi2IKEkYV": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"className": "h-full",
+				"role": "tab",
+				"deletable": true,
+				"serverSideRef": "tab_1",
+				"iterableChild": true,
+				"style": {
+					"height": "80%"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "1zlPBnpmuU",
+			"hidden": false,
+			"nodes": [
+				"hZkidtv62R",
+				"A5u-vg61Py",
+				"DWPgPwKOrJ",
+				"49Kmwv4EOJ",
+				"bUCRTFq2Xz"
+			],
+			"linkedNodes": {}
+		},
+		"GGbpE-YcQz": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"className": "h-full",
+				"role": "tab",
+				"deletable": true,
+				"serverSideRef": "tab_2",
+				"iterableChild": true,
+				"style": {
+					"height": "80%"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "1zlPBnpmuU",
+			"hidden": false,
+			"nodes": [
+				"rgWmhia2to",
+				"IAUgq4-IBe",
+				"JtA_tYFkmm",
+				"N1ycvU_5OA",
+				"UuTgRE27Tf",
+				"MO7t5PN_eV",
+				"iVkNkj2ffs",
+				"tbxs8FKV2D"
+			],
+			"linkedNodes": {}
+		},
+		"hZkidtv62R": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"style": {
+					"display": "flex",
+					"flexDirection": "row",
+					"paddingTop": "20px",
+					"paddingRight": "20px",
+					"paddingBottom": "20px",
+					"paddingLeft": "20px",
+					"alignItems": "center",
+					"gap": "20px",
+					"backgroundColor": "rgba(255, 255, 255, 0.8)",
+					"borderRadius": "15px",
+					"marginBottom": "15px",
+					"boxShadow": "0px 0px 15px 0px rgba(0, 0, 0, 0.1)"
+				},
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "vSi2IKEkYV",
+			"hidden": false,
+			"nodes": [
+				"lZsrMZcetL",
+				"nTQQh0ZQ9w"
+			],
+			"linkedNodes": {}
+		},
+		"lZsrMZcetL": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"width": "40px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "hZkidtv62R",
+			"hidden": false,
+			"nodes": [
+				"acgHGXfkCN"
+			],
+			"linkedNodes": {}
+		},
+		"nTQQh0ZQ9w": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "hZkidtv62R",
+			"hidden": false,
+			"nodes": [
+				"WKXtYJKbSu",
+				"2iyQWbXOZ5"
+			],
+			"linkedNodes": {}
+		},
+		"acgHGXfkCN": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-images",
+				"style": {
+					"fontSize": "2rem",
+					"width": "fit-content",
+					"height": "fit-content"
+				}
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "lZsrMZcetL",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"WKXtYJKbSu": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "Image Similarity Search with Vector Comparison",
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1rem",
+					"color": "#333",
+					"fontWeight": "500",
+					"marginBottom": "5px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "nTQQh0ZQ9w",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"2iyQWbXOZ5": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "In this HDI, we use semantic vector embeddings to compare images and find the ones most relevant to your search prompt. Each image is first analyzed by OpenAI Vision, which generates a natural language description of what the picture is about. That description—not the raw image—is then converted into a 4D vector.",
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					},
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": ""
+							}
+						]
+					},
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "Your prompt is embedded the same way, and cosine similarity is calculated between the two. The closer the score, the more relevant the image. You can also upload your own image to be analyzed and compared."
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "0.8rem",
+					"color": "#666"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "nTQQh0ZQ9w",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"A5u-vg61Py": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"style": {
+					"display": "flex",
+					"flexDirection": "row",
+					"paddingTop": "20px",
+					"paddingRight": "20px",
+					"paddingBottom": "20px",
+					"paddingLeft": "20px",
+					"justifyContent": "flex-start",
+					"alignItems": "center",
+					"gap": "20px",
+					"backgroundColor": "rgba(255, 255, 255, 0.8)",
+					"borderRadius": "15px",
+					"marginBottom": "15px",
+					"boxShadow": "0px 0px 15px 0px rgba(0, 0, 0, 0.1)"
+				},
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "vSi2IKEkYV",
+			"hidden": false,
+			"nodes": [
+				"UBfHG0PZgD",
+				"Be4TFgQvwD"
+			],
+			"linkedNodes": {}
+		},
+		"UBfHG0PZgD": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"width": "40px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "A5u-vg61Py",
+			"hidden": false,
+			"nodes": [
+				"qEoh9j0Bld"
+			],
+			"linkedNodes": {}
+		},
+		"qEoh9j0Bld": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-solid fa-question",
+				"style": {
+					"fontSize": "2rem"
+				}
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "UBfHG0PZgD",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"Be4TFgQvwD": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "A5u-vg61Py",
+			"hidden": false,
+			"nodes": [
+				"mEEbVui0Lu",
+				"HkbCsDasv5"
+			],
+			"linkedNodes": {}
+		},
+		"mEEbVui0Lu": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "How It Works",
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1rem",
+					"color": "#333",
+					"fontWeight": "500",
+					"marginBottom": "5px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "Be4TFgQvwD",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"HkbCsDasv5": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "- "
+							},
+							{
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "Image Descriptions → Vectors"
+							},
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": ": Every image is analyzed by OpenAI Vision, which generates a description. This text is then embedded into a vector with 4D’s 4D.Vector."
+							}
+						]
+					},
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "- "
+							},
+							{
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "Prompt Vectors"
+							},
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": ": Your prompt (pre-defined or custom) is embedded using OpenAI’s API."
+							}
+						]
+					},
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "- "
+							},
+							{
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "Comparison"
+							},
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": ": Cosine similarity is calculated between the prompt vector and each image vector."
+							}
+						]
+					},
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "- "
+							},
+							{
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "Ranking"
+							},
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": ": Images are sorted and displayed from most to least similar based on this similarity score."
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "0.8rem",
+					"color": "#666"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "Be4TFgQvwD",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"DWPgPwKOrJ": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"style": {
+					"display": "flex",
+					"flexDirection": "row",
+					"paddingTop": "20px",
+					"paddingRight": "20px",
+					"paddingBottom": "20px",
+					"paddingLeft": "20px",
+					"height": "fit-content",
+					"alignItems": "center",
+					"gap": "20px",
+					"backgroundColor": "rgba(255, 255, 255, 0.8)",
+					"borderRadius": "15px",
+					"marginBottom": "15px",
+					"boxShadow": "0px 0px 15px 0px rgba(0, 0, 0, 0.1)"
+				},
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "vSi2IKEkYV",
+			"hidden": false,
+			"nodes": [
+				"5i3BOMuVhp",
+				"jwVQWijBgB"
+			],
+			"linkedNodes": {}
+		},
+		"5i3BOMuVhp": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"width": "40px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "DWPgPwKOrJ",
+			"hidden": false,
+			"nodes": [
+				"VUOr-w3Mwy"
+			],
+			"linkedNodes": {}
+		},
+		"VUOr-w3Mwy": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-solid fa-circle-exclamation",
+				"style": {
+					"fontSize": "2rem"
+				}
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "5i3BOMuVhp",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"jwVQWijBgB": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "DWPgPwKOrJ",
+			"hidden": false,
+			"nodes": [
+				"IrI9oKRytA",
+				"XtBvujYJnj"
+			],
+			"linkedNodes": {}
+		},
+		"IrI9oKRytA": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "Note",
+								"bold": true,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1rem",
+					"color": "#333",
+					"fontWeight": "500",
+					"marginBottom": "5px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "jwVQWijBgB",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"XtBvujYJnj": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"text": "To use a custom prompt, you must provide a valid OpenAI API key in the designated field. Without this key, custom prompts cannot be processed."
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "0.8rem",
+					"color": "#666"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "jwVQWijBgB",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"rgWmhia2to": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [
+				"LAglDikj1a",
+				"95xBdB_2ub"
+			],
+			"linkedNodes": {}
+		},
+		"LAglDikj1a": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "4D.Vector",
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"bold": true
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1rem",
+					"fontWeight": "500",
+					"color": "#333"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "rgWmhia2to",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"95xBdB_2ub": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "Enter a custom prompt and click the Use Custom Prompt button, or choose a prompt in the list and  click Use Selected Prompt button if you don't have an API key. The pictures will be displayed from most to least similar based on your input.",
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "0.8rem",
+					"color": "#666"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "rgWmhia2to",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"k80R4cM9jj": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Add Image",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "dialog",
+						"id": "vr22xdoTAmiv1j5PSsEyJB",
+						"events": [
+							"onclick"
+						],
+						"actionType": "open",
+						"targetDialog": "uploadImage"
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"height": "40px",
+					"width": "20%",
+					"fontSize": "12px",
+					"textAlign": "center",
+					"fontWeight": "500"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "iVkNkj2ffs",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "gxKLRsDPwn"
+			}
+		},
+		"gxKLRsDPwn": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "k80R4cM9jj",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"N1ycvU_5OA": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"gap": "5%",
+					"alignItems": "center",
+					"paddingLeft": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingTop": "0px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [
+				"cVmb6jXoD1",
+				"AXQFjMB3bA"
+			],
+			"linkedNodes": {}
+		},
+		"AXQFjMB3bA": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Apply Selected Prompt",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "eB8dkxgyfkxZBVGuCbckss",
+						"method": "VectorManagement.calculateWithSelectedPrompt",
+						"params": [
+							{
+								"name": "prompt",
+								"type": "cs.PromptsEntity",
+								"datasource": "selectedPrompt",
+								"id": "chvovX1sQ6tRZCPiBaDiSq"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PicturesSelection",
+							"datasource": "pictures"
+						}
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"height": "40px",
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"width": "20%",
+					"fontSize": "12px",
+					"fontWeight": "500"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "N1ycvU_5OA",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "DNxLazZgJ1"
+			}
+		},
+		"DNxLazZgJ1": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "AXQFjMB3bA",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"cVmb6jXoD1": {
+			"type": {
+				"resolvedName": "SelectBox"
+			},
+			"isCanvas": false,
+			"props": {
+				"iterable": true,
+				"classNames": [
+					"beautifulSelectBox"
+				],
+				"events": [],
+				"template": "{{ length }} items",
+				"rowsNumber": 10,
+				"datasource": "promptList",
+				"total": false,
+				"iterator": "",
+				"currentElement": "selectedPrompt",
+				"style": {
+					"width": "74%",
+					"display": "flex",
+					"alignItems": "center",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingTop": "0px",
+					"marginLeft": "8px",
+					"marginBottom": "8px",
+					"marginTop": "8px"
+				}
+			},
+			"displayName": "Select Box",
+			"custom": {},
+			"parent": "N1ycvU_5OA",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"container": "M9DhS8sINR"
+			}
+		},
+		"M9DhS8sINR": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"className": "fd-selectbox__container",
+				"isFixedWidth": true,
+				"iterableChild": true,
+				"style": {
+					"paddingLeft": "14px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {
+				"contentHeight": 40
+			},
+			"parent": "cVmb6jXoD1",
+			"hidden": false,
+			"nodes": [
+				"s3OjU4oWXm"
+			],
+			"linkedNodes": {}
+		},
+		"s3OjU4oWXm": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"id": "text",
+				"datasource": "$This.Description",
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": ""
+							},
+							{
+								"type": "datasource",
+								"dsType": "string",
+								"datasource": "$This.Description",
+								"children": [
+									{
+										"text": "$This.Description"
+									}
+								]
+							},
+							{
+								"text": " "
+							}
+						]
+					}
+				],
+				"iterableChild": true
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "M9DhS8sINR",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"bUCRTFq2Xz": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"gap": "5%",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "vSi2IKEkYV",
+			"hidden": false,
+			"nodes": [
+				"ZWmPzKOdXY",
+				"wEa1Es0EQE"
+			],
+			"linkedNodes": {}
+		},
+		"ZWmPzKOdXY": {
+			"type": {
+				"resolvedName": "TextInput"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"placeholder": "placeholder",
+				"label": "label",
+				"labelPosition": "hidden",
+				"iterableChild": true,
+				"style": {
+					"marginLeft": "0px",
+					"marginRight": "0px",
+					"marginBottom": "0px",
+					"marginTop": "0px",
+					"justifyContent": "center",
+					"display": "block",
+					"width": "80%"
+				}
+			},
+			"displayName": "Text Input",
+			"custom": {},
+			"parent": "bUCRTFq2Xz",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"label": "FrcLuvaZcS",
+				"input": "tSuULR6rik"
+			}
+		},
+		"FrcLuvaZcS": {
+			"type": {
+				"resolvedName": "Label"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"moveable": false,
+				"deletable": true,
+				"text": "Label"
+			},
+			"displayName": "Label",
+			"custom": {},
+			"parent": "ZWmPzKOdXY",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"tSuULR6rik": {
+			"type": {
+				"resolvedName": "Input"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"deletable": false,
+				"className": "w-full bg-transparent",
+				"type": "password",
+				"datasource": "OpenAIkey",
+				"dataType": "string",
+				"moveable": false,
+				"placeholder": "Enter your OpenAI API key here if you have one",
+				"style": {
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"backgroundColor": "#ffffffff",
+					"borderStyle": "none",
+					"width": "100%",
+					"height": "100%"
+				},
+				"revealPassword": true,
+				"intervals": [],
+				"eyePosition": "right",
+				"classNames": [
+					"beautifulInputText"
+				]
+			},
+			"displayName": "Input",
+			"custom": {},
+			"parent": "ZWmPzKOdXY",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"wEa1Es0EQE": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Save",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "ghZ4bG4fwgKp8wDAwyHY4J",
+						"method": "VectorManagement.saveOpenAIKey",
+						"params": [
+							{
+								"name": "openAIKey",
+								"type": "Text",
+								"datasource": "OpenAIkey",
+								"id": "avhZuHQfRrBxYKRxdZa6pa"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "Variable"
+						}
+					},
+					{
+						"type": "simple-action",
+						"id": "8J61Zb7Hxu5f7kCfpWTTy8",
+						"events": [
+							"onclick"
+						],
+						"action": "clear",
+						"actionType": "datasource",
+						"datasource": {
+							"name": "OpenAIkey",
+							"type": "scalar",
+							"from": "",
+							"namespace": "",
+							"dataType": "string"
+						}
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"width": "15%",
+					"height": "50px"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "bUCRTFq2Xz",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "489pMigLY_"
+			}
+		},
+		"489pMigLY_": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "wEa1Es0EQE",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"49Kmwv4EOJ": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"borderBottomWidth": "1px",
+					"borderBottomColor": "#d7d8d9ff",
+					"display": "flex",
+					"justifyContent": "space-between",
+					"paddingLeft": "50px",
+					"paddingRight": "50px",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "vSi2IKEkYV",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"IAUgq4-IBe": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"borderBottomWidth": "1px",
+					"borderBottomColor": "#d7d8d9ff",
+					"display": "flex",
+					"justifyContent": "space-between",
+					"paddingLeft": "50px",
+					"paddingRight": "50px",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"UuTgRE27Tf": {
+			"type": {
+				"resolvedName": "Checkbox"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"label": "label",
+				"variant": "checkbox",
+				"type": "two-state",
+				"size": "md",
+				"labelPosition": "left",
+				"iterableChild": true,
+				"style": {
+					"textAlign": "end",
+					"marginLeft": "14px",
+					"paddingLeft": "8px"
+				}
+			},
+			"displayName": "CheckBox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"label": "sU2XmQc4up",
+				"CheckboxInput": "LIzFck-OAP"
+			}
+		},
+		"sU2XmQc4up": {
+			"type": {
+				"resolvedName": "Label"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"moveable": false,
+				"htmlfor": "5_kfb0_Blj",
+				"text": "Trace",
+				"deletable": true
+			},
+			"displayName": "Label",
+			"custom": {},
+			"parent": "UuTgRE27Tf",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"LIzFck-OAP": {
+			"type": {
+				"resolvedName": "CheckboxInput"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onchange"
+						],
+						"id": "m38NVHTP6xawYew9hGrSRY",
+						"method": "VectorManagement.trace",
+						"params": [],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "Boolean",
+							"datasource": "traceStatus"
+						}
+					}
+				],
+				"deletable": false,
+				"style": {
+					"textAlign": "start"
+				},
+				"iterableChild": true
+			},
+			"displayName": "Checkbox Input",
+			"custom": {},
+			"parent": "UuTgRE27Tf",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"MO7t5PN_eV": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"borderBottomWidth": "1px",
+					"borderBottomColor": "#d7d8d9ff",
+					"display": "flex",
+					"justifyContent": "space-between",
+					"paddingLeft": "50px",
+					"paddingRight": "50px",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [
+				"IBgaJ5vd4J",
+				"4QNt0YQVHR"
+			],
+			"linkedNodes": {}
+		},
+		"IBgaJ5vd4J": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"width": "auto",
+					"paddingTop": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingLeft": "0px",
+					"flexDirection": "column"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "MO7t5PN_eV",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"4QNt0YQVHR": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"paddingTop": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingLeft": "0px",
+					"width": "fit-content"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "MO7t5PN_eV",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"tbxs8FKV2D": {
+			"type": {
+				"resolvedName": "Matrix"
+			},
+			"isCanvas": false,
+			"props": {
+				"gridProps": {
+					"styleboxWidth": 285,
+					"styleboxHeight": 350,
+					"styleboxPercentWidth": "",
+					"enableMosaic": true
+				},
+				"orientation": "vertical",
+				"iterable": true,
+				"classNames": [],
+				"events": [],
+				"style": {
+					"borderStyle": "none",
+					"backgroundColor": "#ffffffff",
+					"height": "35%",
+					"marginBottom": "200px"
+				},
+				"datasource": "pictures",
+				"currentElement": ""
+			},
+			"displayName": "Matrix",
+			"custom": {
+				"states:5eDaTy87rgSCrens7TVWaX": {
+					"gridProps": {
+						"styleboxWidth": 285,
+						"styleboxHeight": 285,
+						"styleboxPercentWidth": "",
+						"enableMosaic": true
+					}
+				},
+				"states:gnJYwamfoJmTwq2CwbX1G8": {
+					"gridProps": {
+						"styleboxWidth": 285,
+						"styleboxHeight": 285,
+						"styleboxPercentWidth": "",
+						"enableMosaic": true
+					}
+				},
+				"states:uBK7SdtPRDcpSGGuGJSBbE": {
+					"gridProps": {
+						"styleboxWidth": 285,
+						"styleboxHeight": 285,
+						"styleboxPercentWidth": "",
+						"enableMosaic": true
+					}
+				},
+				"states:2BGqn5ysSHk5LFyPWSf7vn": {
+					"gridProps": {
+						"styleboxWidth": 285,
+						"styleboxHeight": 285,
+						"styleboxPercentWidth": "",
+						"enableMosaic": true
+					}
+				}
+			},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"container": "D_-PrO-VFO"
+			}
+		},
+		"D_-PrO-VFO": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"style": {
+					"minHeight": "350px",
+					"display": "flex",
+					"alignItems": "center",
+					"width": "285px",
+					"height": "350px",
+					"maxHeight": "350px",
+					"minWidth": "285px",
+					"paddingLeft": "5px",
+					"paddingRight": "5px",
+					"paddingBottom": "5px",
+					"paddingTop": "5px",
+					"maxWidth": "285px",
+					"backgroundColor": "#ffffffff",
+					"justifyContent": "center",
+					"flexDirection": "column"
+				},
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {
+				"states:5eDaTy87rgSCrens7TVWaX": {
+					"style": {
+						"justifyContent": "center"
+					}
+				}
+			},
+			"parent": "tbxs8FKV2D",
+			"hidden": false,
+			"nodes": [
+				"M_C83OxhNq",
+				"tOCNudmDRY"
+			],
+			"linkedNodes": {}
+		},
+		"M_C83OxhNq": {
+			"type": {
+				"resolvedName": "TextInput"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"placeholder": "placeholder",
+				"label": "label",
+				"labelPosition": "left",
+				"iterableChild": true,
+				"disabled": false
+			},
+			"displayName": "Text Input",
+			"custom": {},
+			"parent": "D_-PrO-VFO",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"label": "5_Nd_A280q",
+				"input": "FgNlTAf02s"
+			}
+		},
+		"5_Nd_A280q": {
+			"type": {
+				"resolvedName": "Label"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"moveable": false,
+				"text": "Cosine Similarity:",
+				"deletable": true
+			},
+			"displayName": "Label",
+			"custom": {},
+			"parent": "M_C83OxhNq",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"FgNlTAf02s": {
+			"type": {
+				"resolvedName": "Input"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"deletable": false,
+				"className": "w-full bg-transparent",
+				"type": "text",
+				"intervals": [],
+				"datasource": "$This.cosineSimilarity",
+				"style": {
+					"width": "100px"
+				},
+				"moveable": false,
+				"placeholder": "placeholder",
+				"revealPassword": true,
+				"eyePosition": "right",
+				"disabled": false
+			},
+			"displayName": "Input",
+			"custom": {},
+			"parent": "M_C83OxhNq",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"tOCNudmDRY": {
+			"type": {
+				"resolvedName": "Image"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"style": {
+					"width": "100%",
+					"height": "250px",
+					"minWidth": "100%",
+					"minHeight": "250px",
+					"borderRadius": "20px",
+					"borderWidth": "1px",
+					"borderColor": "#d7d8d9ff",
+					"maxWidth": "100%",
+					"maxHeight": "250px",
+					"zIndex": "1",
+					"display": "flex"
+				},
+				"datasource": "$This.picture",
+				"imgSrc": ""
+			},
+			"displayName": "Image",
+			"custom": {},
+			"parent": "D_-PrO-VFO",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"JtA_tYFkmm": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"gap": "5%",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [
+				"vAouVGbTe-",
+				"QrAZqg-BDE"
+			],
+			"linkedNodes": {}
+		},
+		"vAouVGbTe-": {
+			"type": {
+				"resolvedName": "TextInput"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"placeholder": "placeholder",
+				"label": "label",
+				"labelPosition": "hidden",
+				"iterableChild": true,
+				"style": {
+					"marginLeft": "0px",
+					"marginRight": "0px",
+					"marginBottom": "0px",
+					"marginTop": "0px",
+					"justifyContent": "center",
+					"display": "block",
+					"width": "75%"
+				},
+				"classNames": []
+			},
+			"displayName": "Text Input",
+			"custom": {},
+			"parent": "JtA_tYFkmm",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"label": "YkdMrlR-45",
+				"input": "34NKL51NRV"
+			}
+		},
+		"YkdMrlR-45": {
+			"type": {
+				"resolvedName": "Label"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"moveable": false,
+				"deletable": true,
+				"text": "Label"
+			},
+			"displayName": "Label",
+			"custom": {},
+			"parent": "vAouVGbTe-",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"34NKL51NRV": {
+			"type": {
+				"resolvedName": "Input"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"deletable": false,
+				"className": "w-full bg-transparent",
+				"type": "text",
+				"datasource": "searchInput",
+				"dataType": "string",
+				"moveable": false,
+				"placeholder": "CUSTOM PROMPT",
+				"style": {
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"backgroundColor": "#ffffffff",
+					"borderStyle": "none"
+				},
+				"revealPassword": true,
+				"intervals": [],
+				"eyePosition": "right",
+				"classNames": [
+					"beautifulInputText"
+				]
+			},
+			"displayName": "Input",
+			"custom": {},
+			"parent": "vAouVGbTe-",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"QrAZqg-BDE": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Apply Custom Prompt",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "rZvatrC738dZpi33cHsxta",
+						"method": "VectorManagement.calculate",
+						"params": [
+							{
+								"name": "prompt",
+								"type": "Text",
+								"datasource": "searchInput",
+								"id": "3P1kpzmSv3TjFXUUqCYZcs"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PicturesSelection",
+							"datasource": "pictures"
+						}
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"height": "40px",
+					"width": "20%",
+					"fontSize": "12px",
+					"textAlign": "center",
+					"fontWeight": "500"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "JtA_tYFkmm",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "cO9EECWOT9"
+			}
+		},
+		"cO9EECWOT9": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "QrAZqg-BDE",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"iVkNkj2ffs": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"gap": "5%",
+					"alignItems": "center",
+					"justifyContent": "flex-end"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "GGbpE-YcQz",
+			"hidden": false,
+			"nodes": [
+				"k80R4cM9jj"
+			],
+			"linkedNodes": {}
+		},
+		"ZcKppj6Zs-": {
+			"type": {
+				"resolvedName": "Dialog"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"overlay": true,
+				"serverSideRef": "setApiKeyModal",
+				"closable": true,
+				"style": {
+					"paddingLeft": "25px",
+					"paddingRight": "25px",
+					"paddingTop": "25px",
+					"paddingBottom": "25px",
+					"borderRadius": "15px",
+					"maxWidth": "400px",
+					"width": "400px"
+				}
+			},
+			"displayName": "Dialog",
+			"custom": {},
+			"parent": "ROOT",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"Dialog": "yjSQ1RIiys",
+				"close": "u9QGvCY5MG"
+			}
+		},
+		"yjSQ1RIiys": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"className": "h-full flex-1",
+				"iterableChild": true
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "ZcKppj6Zs-",
+			"hidden": false,
+			"nodes": [
+				"k04588psl3",
+				"uCoSzAyyXi",
+				"HudbfXMztG",
+				"WHrpy4G3gl"
+			],
+			"linkedNodes": {}
+		},
+		"uCoSzAyyXi": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"borderBottomWidth": "1px",
+					"borderBottomColor": "#d7d8d9ff",
+					"display": "flex",
+					"justifyContent": "space-between",
+					"paddingLeft": "50px",
+					"paddingRight": "50px",
+					"alignItems": "center"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "yjSQ1RIiys",
+			"hidden": false,
+			"nodes": [
+				"LB89LVAHh4",
+				"58m1iiy0q3"
+			],
+			"linkedNodes": {}
+		},
+		"LB89LVAHh4": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"width": "auto",
+					"paddingTop": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingLeft": "0px",
+					"flexDirection": "column"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "uCoSzAyyXi",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"58m1iiy0q3": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"paddingTop": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingLeft": "0px",
+					"width": "fit-content"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "uCoSzAyyXi",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"k04588psl3": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "Set Your OpenAI API Key",
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"bold": true
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1.1rem",
+					"fontWeight": "500",
+					"color": "#333",
+					"position": "absolute",
+					"top": "-35px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "yjSQ1RIiys",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"HudbfXMztG": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "To use a custom prompt, you’ll need to provide your OpenAI API key. Paste it below to unlock semantic search powered by AI.",
+								"bold": false,
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "0.85rem",
+					"color": "#666",
+					"marginTop": "20px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "yjSQ1RIiys",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"u9QGvCY5MG": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [
+					"modalCloseButton"
+				],
+				"events": [],
+				"icon": "fa-times"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "ZcKppj6Zs-",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"WHrpy4G3gl": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"gap": "5%",
+					"alignItems": "center",
+					"marginTop": "20px",
+					"paddingLeft": "0px",
+					"paddingRight": "0px",
+					"paddingBottom": "0px",
+					"paddingTop": "0px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "yjSQ1RIiys",
+			"hidden": false,
+			"nodes": [
+				"2LgwWHheQY",
+				"nQjR-eihPX"
+			],
+			"linkedNodes": {}
+		},
+		"2LgwWHheQY": {
+			"type": {
+				"resolvedName": "TextInput"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"placeholder": "placeholder",
+				"label": "label",
+				"labelPosition": "hidden",
+				"iterableChild": true,
+				"style": {
+					"marginLeft": "0px",
+					"marginRight": "0px",
+					"marginBottom": "0px",
+					"justifyContent": "center",
+					"display": "block",
+					"width": "80%"
+				}
+			},
+			"displayName": "Text Input",
+			"custom": {},
+			"parent": "WHrpy4G3gl",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"label": "0cdN3FU96V",
+				"input": "YruSaihvd4"
+			}
+		},
+		"0cdN3FU96V": {
+			"type": {
+				"resolvedName": "Label"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"moveable": false,
+				"deletable": true,
+				"text": "Label"
+			},
+			"displayName": "Label",
+			"custom": {},
+			"parent": "2LgwWHheQY",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"YruSaihvd4": {
+			"type": {
+				"resolvedName": "Input"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"deletable": false,
+				"className": "w-full bg-transparent",
+				"type": "password",
+				"datasource": "OpenAIkey",
+				"dataType": "string",
+				"moveable": false,
+				"placeholder": "Enter your OpenAI API key",
+				"style": {
+					"paddingLeft": "14px",
+					"paddingRight": "14px",
+					"paddingBottom": "14px",
+					"paddingTop": "14px",
+					"backgroundColor": "#ffffffff",
+					"borderStyle": "none",
+					"width": "100%",
+					"height": "100%"
+				},
+				"revealPassword": true,
+				"intervals": [],
+				"eyePosition": "right",
+				"classNames": [
+					"beautifulInputText"
+				]
+			},
+			"displayName": "Input",
+			"custom": {},
+			"parent": "2LgwWHheQY",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"nQjR-eihPX": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Save",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "ndHXJqoSGxxEcisXv5E96n",
+						"method": "VectorManagement.saveOpenAIKey",
+						"params": [
+							{
+								"name": "openAIKey",
+								"type": "Text",
+								"datasource": "OpenAIkey",
+								"id": "7abRvMDP7WuZpsMGdZAvPK"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "Variable"
+						},
+						"feedback": false
+					},
+					{
+						"type": "dialog",
+						"id": "4KbagtHwJn151UaRVnMtLT",
+						"events": [
+							"onclick"
+						],
+						"actionType": "close",
+						"targetDialog": "setApiKeyModal"
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"width": "15%",
+					"height": "50px"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "WHrpy4G3gl",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "HzFlssMIW8"
+			}
+		},
+		"HzFlssMIW8": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "nQjR-eihPX",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"7PwkczZfEx": {
+			"type": {
+				"resolvedName": "Dialog"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"overlay": true,
+				"serverSideRef": "uploadImage",
+				"closable": true,
+				"style": {
+					"paddingLeft": "25px",
+					"paddingRight": "25px",
+					"paddingTop": "25px",
+					"paddingBottom": "0px",
+					"borderRadius": "15px",
+					"maxWidth": "550px",
+					"width": "550px",
+					"height": "fit-content"
+				}
+			},
+			"displayName": "Dialog",
+			"custom": {},
+			"parent": "ROOT",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"Dialog": "u19icaKJCt",
+				"close": "68MGE-dJ4k"
+			}
+		},
+		"u19icaKJCt": {
+			"type": {
+				"resolvedName": "StyleBox"
+			},
+			"isCanvas": true,
+			"props": {
+				"events": [],
+				"className": "h-full flex-1",
+				"iterableChild": true,
+				"style": {
+					"display": "flex",
+					"justifyContent": "flex-start",
+					"alignItems": "center",
+					"flexDirection": "column",
+					"paddingBottom": "0px",
+					"height": "fit-content",
+					"marginBottom": "0px"
+				}
+			},
+			"displayName": "Stylebox",
+			"custom": {},
+			"parent": "7PwkczZfEx",
+			"hidden": false,
+			"nodes": [
+				"63AS1XDhPt",
+				"fmWEqKhgdV",
+				"QKP-MqyIpA"
+			],
+			"linkedNodes": {}
+		},
+		"63AS1XDhPt": {
+			"type": {
+				"resolvedName": "Text"
+			},
+			"isCanvas": false,
+			"props": {
+				"events": [],
+				"iterableChild": true,
+				"doc": [
+					{
+						"type": "paragraph",
+						"children": [
+							{
+								"text": "Upload Your Image",
+								"italic": false,
+								"underlined": false,
+								"strikethrough": false,
+								"bold": true
+							}
+						]
+					}
+				],
+				"datasource": "",
+				"style": {
+					"fontSize": "1.1rem",
+					"fontWeight": "500",
+					"color": "#333",
+					"position": "absolute",
+					"top": "-35px"
+				}
+			},
+			"displayName": "Text",
+			"custom": {
+				"__t": {}
+			},
+			"parent": "u19icaKJCt",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"68MGE-dJ4k": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [
+					"modalCloseButton"
+				],
+				"events": [],
+				"icon": "fa-times"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "7PwkczZfEx",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"fmWEqKhgdV": {
+			"type": {
+				"resolvedName": "FileUpload"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [
+					"uploadStyle"
+				],
+				"events": [],
+				"text": "Drag and drop your images here or Browse",
+				"iconPosition": "top",
+				"style": {
+					"borderStyle": "dashed",
+					"maxWidth": "440px",
+					"width": "440px"
+				},
+				"fileType": "image/*",
+				"datasource": "pictureEntity.picture",
+				"fileSizeLimit": ""
+			},
+			"displayName": "File Upload",
+			"custom": {},
+			"parent": "u19icaKJCt",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "yw1K2u95NZ"
+			}
+		},
+		"yw1K2u95NZ": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-solid fa-cloud-arrow-up"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "fmWEqKhgdV",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		},
+		"QKP-MqyIpA": {
+			"type": {
+				"resolvedName": "Button"
+			},
+			"isCanvas": false,
+			"props": {
+				"text": "Upload",
+				"classNames": [
+					"buttonStyle"
+				],
+				"events": [
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "dwuVVnMfy39vE8q8Bcg1f3",
+						"method": "VectorManagement.vectorizeImageDescription",
+						"params": [
+							{
+								"name": "imageToUpload",
+								"type": "cs.PicturesEntity",
+								"datasource": "pictureEntity",
+								"id": "hS6h1XqkRhVfZVt5wqQfcU"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PicturesEntity",
+							"datasource": ""
+						},
+						"feedback": true
+					},
+					{
+						"type": "method",
+						"dataclass": "VectorManagement",
+						"events": [
+							"onclick"
+						],
+						"id": "fpdYmHjduFa85E32TYjwuo",
+						"method": "VectorManagement.calculate",
+						"params": [
+							{
+								"name": "prompt",
+								"type": "Text",
+								"datasource": "searchInput",
+								"id": "mS3Y1zWZ1pa6VKcjK5KjXd"
+							}
+						],
+						"datasource": "",
+						"methodType": "singleton",
+						"returns": {
+							"name": "result",
+							"type": "cs.PicturesSelection",
+							"datasource": "pictures"
+						}
+					}
+				],
+				"iconPosition": "hidden",
+				"style": {
+					"display": "flex",
+					"marginTop": "10px",
+					"width": "150px",
+					"marginBottom": "15px"
+				}
+			},
+			"displayName": "Button",
+			"custom": {},
+			"parent": "u19icaKJCt",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {
+				"icon": "ndzQRXeD3k"
+			}
+		},
+		"ndzQRXeD3k": {
+			"type": {
+				"resolvedName": "Icon"
+			},
+			"isCanvas": false,
+			"props": {
+				"classNames": [],
+				"events": [],
+				"icon": "fa-regular fa-star"
+			},
+			"displayName": "Icon",
+			"custom": {},
+			"parent": "QKP-MqyIpA",
+			"hidden": false,
+			"nodes": [],
+			"linkedNodes": {}
+		}
+	}
+}

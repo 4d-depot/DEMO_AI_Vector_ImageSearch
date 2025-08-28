@@ -1,0 +1,67 @@
+{
+	"Qodly": [
+		{
+			"id": "Title",
+			"dataType": "string",
+			"type": "scalar",
+			"namespace": "Qodly",
+			"initialValue": ""
+		},
+		{
+			"id": "Location",
+			"dataType": "object",
+			"type": "scalar",
+			"namespace": "Qodly",
+			"initialValue": {
+				"urlQuery": [],
+				"urlPath": {},
+				"Anchor": ""
+			},
+			"schema": {
+				"type": "object",
+				"properties": [
+					{
+						"name": "urlQuery",
+						"type": "array",
+						"initialValue": []
+					},
+					{
+						"name": "urlPath",
+						"type": "object",
+						"initialValue": {}
+					},
+					{
+						"name": "Anchor",
+						"type": "string",
+						"initialValue": ""
+					}
+				]
+			}
+		},
+		{
+			"id": "UserLanguage",
+			"dataType": "object",
+			"type": "scalar",
+			"namespace": "Qodly",
+			"initialValue": {
+				"selected": {},
+				"supported": []
+			},
+			"schema": {
+				"type": "object",
+				"properties": [
+					{
+						"name": "selected",
+						"type": "object",
+						"initialValue": {}
+					},
+					{
+						"name": "supported",
+						"type": "array",
+						"initialValue": []
+					}
+				]
+			}
+		}
+	]
+}

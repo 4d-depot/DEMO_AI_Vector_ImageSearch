@@ -1,0 +1,29 @@
+{
+	"Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Project:Demo_4D_Vectors.4DProject": [
+		{
+			"backupPath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:data[0001].4BK",
+			"structurePath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Project:Demo_4D_Vectors.4DProject",
+			"dataPath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Data:data.4DD",
+			"logPath": "",
+			"startingDate": "2025-06-24T08:58:59.509Z",
+			"endingDate": "2025-06-24T08:58:59.509Z",
+			"scheduledDate": "2025-06-24T08:58:59.509Z",
+			"backupNumber": 1,
+			"duration": 1791,
+			"attachments": [
+				{
+					"attachmentPath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Data:data.4DSyncHeader",
+					"found": false
+				},
+				{
+					"attachmentPath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Data:data.4DSyncData",
+					"found": false
+				},
+				{
+					"attachmentPath": "Work Basma:Users:basma:Desktop:Demo_4D_Vectors 2:Data:data.4DIndx",
+					"found": true
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="12">
+	<com.4d>
+		<web>
+			<standalone_server>
+				<qodlystudio enabled="true"/>
+				<configuration allow_ssl="false" port_number="8080" publish_at_startup="true" session_mode="1"/>
+				<rest launch_at_startup="true"/>
+			</standalone_server>
+		</web>
+		<interface>
+			<user sdi_application="false"/>
+		</interface>
+	</com.4d>
+</preferences>
