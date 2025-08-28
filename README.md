@@ -14,14 +14,12 @@ This demo illustrates how to:
 
 ### 📦 Pre-requisites
 
-#### **4D Software**
-
+#### **4D Software**:
 * Download the latest **Release** version of 4D: [Product Download](https://us.4d.com/product-download)
 * Or the latest **Beta** version: [Beta Program](https://discuss.4d.com)
 * Follow activation steps: [Installation Guide](https://developer.4d.com/docs/GettingStarted/installation)
 
-#### **OpenAI API Key** (required for AI-powered semantic search)
-
+#### **OpenAI API Key** (required for AI-powered semantic search):
 * Generate one here: [OpenAI API Keys](https://platform.openai.com/account/api-keys)
 * Best practices:
   * Never share your key publicly (e.g., in GitHub).
@@ -29,14 +27,11 @@ This demo illustrates how to:
   * Monitor usage in the OpenAI dashboard.
   * Set limits or alerts to avoid unexpected costs.
 
-#### **Qodly Studio**
-
+#### **Qodly Studio**:
 * Enable Qodly Studio: [Qodly Studio Setup](https://developer.4d.com/docs/WebServer/qodly-studio)
 
 
 ### ▶️ Steps to Run the Project
-
-#### Standard 4D Usage
 
 1. Clone or download this repository to your local machine.
    * Need help? See [Using GitHub with 4D](https://blog.4d.com/github-4d-depot/).
