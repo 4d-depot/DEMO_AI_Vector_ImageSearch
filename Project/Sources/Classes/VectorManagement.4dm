@@ -160,12 +160,14 @@ exposed Function vectorizeImageDescription($imageToUpload : cs.PicturesEntity) :
 
 	// --- Prompts (single, fluent, embedding-friendly) ---
 	$captionPrompt:="You are a precise visual captioner. "+\
-		"Write one fluent English sentence, 20–30 words long, that vividly describes the main subject, context, and atmosphere of the image. "+\
-		"Avoid lists, keywords, or extra commentary. Output only the sentence."
+ 		"Write one short, clear English sentence (12–20 words) that summarizes the main subject of the image. "+\
+ 		"Keep it straightforward and descriptive, not poetic. Output only the sentence."
 
-	$descriptionPrompt:="Describe the image in one clear and complete English sentence, between 20 and 40 words. "+\
-		"Focus on the main subject, its setting, and any notable details or atmosphere. "+\
-		"Do not provide lists, keywords, or multiple sentences. Return only the description."
+	$descriptionPrompt:="You are a detailed scene describer. "+\
+		"Write a longer English paragraph (80–150 words) that expands on the caption. "+\
+		"Include context, secondary elements (icons, arrows, checklists, text, logos), and atmosphere so nothing important is missed. "+\
+		"Avoid repeating the caption verbatim. Output only the description."
+
 	
 	// --- Get caption ---
 	$caption:=$client.chat.vision.create($imageData).prompt($captionPrompt).choice.message.text

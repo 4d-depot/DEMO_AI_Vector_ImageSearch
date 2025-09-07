@@ -16,4 +16,4 @@ Function generateVector($text : Text) : 4D.Vector
 	var $result:=This.clientAI.embeddings.create($text; $model)
 	
 	// Convert the embedding collection into a 4D.Vector object and return it
-	return 4D.Vector.new($result.embedding.embedding.toCollection())
+	return $result.vector

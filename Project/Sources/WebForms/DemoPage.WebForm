@@ -1581,7 +1581,8 @@
 				"style": {
 					"textAlign": "start"
 				},
-				"iterableChild": true
+				"iterableChild": true,
+				"datasource": "traceStatus"
 			},
 			"displayName": "Checkbox Input",
 			"custom": {},
